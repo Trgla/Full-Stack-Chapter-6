@@ -23,7 +23,7 @@ export const createAnecdote = async (newAnecdote) => {
         }
 
         return await response.json()
-    }
+    } throw new Error('Anecdote length must be at least 5')
 }
 
 export const updateAnecdote = async (updatedAnecdote) => {

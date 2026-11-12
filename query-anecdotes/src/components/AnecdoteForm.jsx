@@ -1,13 +1,19 @@
 import { useAnecdotes } from "../hooks/useAnecdotes"
+import useNotification from "../hooks/useNotify"
 
 const AnecdoteForm = () => {
   const { addAnecdote: addAnecdotetoServer } = useAnecdotes()
-
+  const { creation, lengthRequirement, timeOut } = useNotification()
   const onCreate = async (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
     event.target.reset()
-    addAnecdotetoServer(content)
+    if (content.length >= 5) {
+      addAnecdotetoServer(content)
+      creation(content)
+    }
+    else {lengthRequirement()}
+    timeOut()
   }
 
   return (
